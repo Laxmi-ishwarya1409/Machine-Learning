@@ -1,0 +1,143 @@
+->The goal of linear regression is to find a straight line:
+                 𝑦=𝑚𝑋+𝑐
+
+-> It does this by minimizing the Cost Function (MSE):
+                𝐽=1/𝑛∑(𝑦𝑖−y predicted)²
+
+-> But sometimes, when we have:
+
+        too many features (independent variables)
+        noisy or correlated data
+
+-> the model overfits — it performs great on training data but poorly on unseen data.
+
+
+
+
+
+
+Overfitting & Underfitting
+
+    -> In machine learning, when we train a regression model (like Linear Regression), we want it to work well on new unseen data, not just on the training data.
+
+    ➤ Overfitting:
+
+        -> Model fits training data too perfectly — passes through almost every point.
+
+        -> It performs great on training data but bad on new/test data.
+
+        -> So we say:
+                Low bias (fits training data well)
+
+                High variance (fails on new data)
+
+    ➤ Underfitting:
+
+        -> Model cannot even fit the training data properly.
+
+        -> It performs bad on both training and test data.
+
+        -> So,we say:
+                High bias
+
+                High variance
+
+➤ Goal:
+
+    -> We want a generalized model → performs well on both training and test data.
+
+
+
+
+
+
+Regularization (Ridge & Lasso)
+
+    -> Regularization is a technique to prevent overfitting.
+
+    -> It slightly penalizes large coefficients (slope values) in the model so that the line doesn’t become too steep.
+
+
+
+Without Regularization:
+    -> The model only cares about minimizing error:
+
+            𝐽=1/2𝑚∑(𝑦 𝑖−𝑦 predicted)2
+
+    -> This can make the model too flexible.
+
+With Regularization
+    -> We tell the model: Don’t just minimize error — also keep your coefficients small
+
+    -> So we add a penalty term:
+        
+        𝐽=1/2𝑚∑(𝑦 𝑖 − 𝑦 predicted)2 + 𝜆 x Penalty
+
+        Here:
+            𝜆 = Regularization strength/ the hyper parameter : (how much penalty you give i.e, how fast lessesn the steepness and grow the steepness)
+
+            Penalty = depends on L1 or L2
+
+    Role of λ (Lambda) 
+
+        -> λ = 0 → no regularization (normal linear regression)
+
+        -> λ = large → too much penalty (underfitting)
+
+        -> λ = small but > 0 → just right (balances fit & simplicity)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+There are two main types:
+1.Ridge Regression → L2 Regularization
+
+    -> Ridge Regression adds the sum of squares of coefficients (weights) to the cost function.
+            𝐽=1/𝑛∑(𝑦 𝑖 − 𝑦 predicted)² + 𝜆 ∑𝑤𝑗² 
+ 
+            where:
+                𝜆 = regularization strength (hyperparameter)
+                𝑤𝑗 = model coefficients (slopes)
+                𝜆∑𝑤𝑗² = L2 penalty term
+
+            -> Intuition:
+
+                -> Keeps all features but shrinks coefficients toward 0.
+
+                -> Reduces the impact of less important features.
+
+                -> Helps when there’s multicollinearity (correlated features).
+
+    Therefore Ridge says : Don’t remove any feature, but keep their weights small and balanced.
+    Main Purpose: Prevents Overfitting
+
+
+
+2. Lasso Regression (L1 Regularization)
+
+    -> Lasso Regression adds the sum of absolute values of coefficients to the cost function.
+            𝐽=1/𝑛∑(𝑦𝑖−𝑦 predicted)²+𝜆∑∣𝑤𝑗∣
+            
+            
+    Intuition:
+
+        -> Can force some coefficients to become exactly 0.
+
+        -> This means it automatically selects important features and eliminates irrelevant ones.
+        
+        -> Great for feature selection.
+
+    Therefore Lasso says: I’ll keep only the most important features and make the rest 0."
+
+    Main Purpose: Prevents Overfitting and good feature selection
